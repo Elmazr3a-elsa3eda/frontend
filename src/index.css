@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+	overflow-x: hidden;
+}
+
 .loader{
 	position: absolute;
 	top: 20%;
@@ -47,4 +51,9 @@
 	bottom: 210px;
 	right: 50px;
 	animation-delay: 0.9s;
+}
+
+#userPic{
+	font-size: 40px;
+	line-height: 0;
 }

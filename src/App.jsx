@@ -22,8 +22,7 @@ function App() {
 		<Routes>
 				{token ? (
 						<>
-								<Route path="/" element={<Layout />} />
-								<Route path="/settings" element={<Home />} />
+								<Route path="/*" element={<Layout />} />
 								<Route path="*" element={<Navigate to="/" replace />} />
 						</>
 				) : (

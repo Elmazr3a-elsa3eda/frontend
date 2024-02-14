@@ -1,9 +1,12 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/userContext";
 import Header from "../components/Header";
 import Bubbles from "../components/Bubbles";
 import SideNav from "../components/SideNav";
+import Home from "./Home";
+import Settings from "./Settings";
+import Footer from "../components/Footer";
 function Layout() {
   const { token } = useContext(AuthContext);
 
@@ -12,17 +15,21 @@ function Layout() {
 		<div className="w-screen min-h-screen bg-black overflow-x-hidden z-30 relative">
 			<Header />
 
-			<div className="w-full h-full py-4 px-2 md:px-7 flex flex-row justify-center items-start gap-6">
+			<div className="w-full min-h-screen py-4 px-2 flex flex-row justify-center items-start gap-2">
 				<div className="w-1/12 h-full md:block hidden">
 					<SideNav />
 				</div>
 
-				<div className="w-full md:w-11/12 h-full z-30">
-					<Outlet />
+				<div className="w-full h-full z-30 bg-red-600">
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="settings" element={<Settings />} />
+					</Routes>
 				</div>
 			</div>
 
 			<Bubbles />
+			<Footer />
 		</div>
 	) 
 }

@@ -2,30 +2,38 @@ import loginApi from "../api/loginApi"
 import AuthContext from "../context/userContext"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Loading from "../components/Loading";
 function SignIn() {
   const [loading, setLoading] = useState(false);
-  const { token, setToken } = useContext(AuthContext)
+  const { token, setToken, setUser } = useContext(AuthContext)
   const [data, setData] = useState({username: '', password: ''})
   const [error, setError] = useState(null)
+  const navigate = useNavigate();
 
-  const handleLogin = (token) => {
+  const handleLogin = (token,user) => {
     setToken(token);
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    navigate('/')
   };
 
   useEffect(() => {
     const tokenFromStorage = localStorage.getItem('token');
+    const userFronStorage = localStorage.getItem('user');
     if (tokenFromStorage) {
       setToken(tokenFromStorage);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${tokenFromStorage}`;
+      setUser(JSON.parse(userFronStorage))
+      navigate('/')
     }
   }, []);
 
   const handleSignIn =  (data) => {
     loginApi.login(data).then((res) => {
       setToken(res.data.token)
-      handleLogin(res.data.token)
+      setUser(res.data.user)
+      handleLogin(res.data.token,res.data.user)
     }).catch((err) => {
       setLoading(false)
       console.log(err)
