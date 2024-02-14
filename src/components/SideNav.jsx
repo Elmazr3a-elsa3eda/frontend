@@ -13,9 +13,10 @@ function SideNav() {
 	const {token,setToken} = useContext(AuthContext)
 
 	const handleLogout = () => {
-    setToken(null);
-    delete axios.defaults.headers.common['Authorization'];
-  };
+		setToken(null);
+		localStorage.removeItem('token');
+		delete axios.defaults.headers.common['Authorization'];
+	};
 	return (
 		<>
 			<div className="w-full max-w-[133px] h-full min-h-[500px] max-h-[782px] pt-10 pb-5 flex flex-col justify-center items-center bg-darkerblue/70 z-20 rounded-[20px] relative">

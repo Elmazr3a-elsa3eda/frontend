@@ -12,8 +12,15 @@ function SignIn() {
 
   const handleLogin = (token) => {
     setToken(token);
-    // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    localStorage.setItem('token', token);
   };
+
+  useEffect(() => {
+    const tokenFromStorage = localStorage.getItem('token');
+    if (tokenFromStorage) {
+      setToken(tokenFromStorage);
+    }
+  }, []);
 
   const handleSignIn =  (data) => {
     loginApi.login(data).then((res) => {

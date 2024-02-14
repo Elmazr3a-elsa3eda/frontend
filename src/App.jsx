@@ -23,7 +23,7 @@ function App() {
 				{token ? (
 						<>
 								<Route path="/" element={<Layout />} />
-								{/* <Route path="/home" element={<Home />} /> */}
+								<Route path="/settings" element={<Home />} />
 								<Route path="*" element={<Navigate to="/" replace />} />
 						</>
 				) : (
