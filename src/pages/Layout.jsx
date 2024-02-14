@@ -20,7 +20,7 @@ function Layout() {
 					<SideNav />
 				</div>
 
-				<div className="w-full h-full z-30 bg-red-600">
+				<div className="w-full h-full z-30">
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="settings" element={<Settings />} />

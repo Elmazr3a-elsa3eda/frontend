@@ -96,7 +96,7 @@ function SignIn() {
         Sign in
       </button>
       {error && <p className="text-red-500 text-lg font-protest p-2 rounded-md border border-red-500 text-center mx-auto w-full">{error}</p>}
-      {/* {loading && <Loading />} */}
+      {loading && <Loading />}
       <p className="text-center text-sm text-gray-500">
         No account?
         <Link to="/signup" className="underline">Sign up</Link>

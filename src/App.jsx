@@ -14,9 +14,6 @@ import AuthContext from "./context/userContext";
 function App() {
 	const {token} = useContext(AuthContext)
 
-  const handleSignup = () => {
-    console.log('User signed up successfully');
-  };
 	return (
 		<Router>
 		<Routes>

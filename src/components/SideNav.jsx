@@ -14,7 +14,7 @@ function SideNav() {
 
 	const handleLogout = () => {
 		setToken(null);
-		localStorage.removeItem('token');
+		localStorage.clear();
 		delete axios.defaults.headers.common['Authorization'];
 	};
 	return (
