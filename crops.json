@@ -1,0 +1,47 @@
+[
+	{
+		"size": 26,
+		"planted_percentage": 20,
+    "harvest_percentage": 50,
+		"crops": [
+			{
+				"name": "Tomato",
+				"overall_percentage": 100,
+				"plantedDate": "2020-01-01",
+				"harvestedDate": "2020-01-30",
+				"pests": [
+					{
+						"name": "Aphids",
+						"percentage": 10
+					},
+					{
+						"name": "Whiteflies",
+						"percentage": 20
+					}
+				]
+			}
+		],
+		"workers": [
+			{
+				"name": "John",
+				"age": 25,
+				"role": "Harvester"
+			},
+			{
+				"name": "Jane",
+				"age": 30,
+				"role": "Harvester"
+			},
+			{
+				"name": "Jim",
+				"age": 35,
+				"role": "Harvester"
+			},
+			{
+				"name": "Jill",
+				"age": 40,
+				"role": "engineer"
+			}
+		]
+	}
+]

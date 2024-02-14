@@ -8,7 +8,7 @@ export default {
     extend: {
       colors:{
         'green':'#9EFFA9',
-        'darckblue': '#9EFFA9',
+        'darckblue': '#36485E',
         'darkerblue':'#333146',
         'black': '#29252C'
       },
