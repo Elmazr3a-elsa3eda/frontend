@@ -19,29 +19,32 @@ function App() {
   };
 	return (
 		<Router>
-			{
-				token ?  
-			
-			(<Routes>
-				<Route path="/signin" element={<SignIn />} />
-				<Route path="/signup" element={<SignUp />} />
-				<Route path="/" element={<Layout />} />
-				<Route path="/" element={<Home />} />
-				{/* <Route path="/" element={<Layout />}>
-          <Route path="/customers" element={<Customers />} />
-          <Route path="/customer/:id" element={<CustomerPage />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/order/:id" element={<OrderDetails />} />
-        </Route> */}
-			</Routes>)
-			: (<Routes>
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="*" element={<Navigate to="/signin" />} />
-      </Routes> )
-		}
-		</Router>
+		<Routes>
+				{token ? (
+						<>
+								<Route path="/" element={<Layout />} />
+								{/* <Route path="/home" element={<Home />} /> */}
+								<Route path="*" element={<Navigate to="/" replace />} />
+						</>
+				) : (
+						<>
+								<Route path="/signin" element={<SignIn />} />
+								<Route path="/signup" element={<SignUp />} />
+								<Route path="*" element={<Navigate to="/signin" replace />} />
+						</>
+				)}
+		</Routes>
+</Router>
 	);
 }
 
 export default App;
+
+
+
+// {/* <Route path="/" element={<Layout />}>
+//   <Route path="/customers" element={<Customers />} />
+//   <Route path="/customer/:id" element={<CustomerPage />} />
+//   <Route path="/orders" element={<Orders />} />
+//   <Route path="/order/:id" element={<OrderDetails />} />
+// </Route> */}

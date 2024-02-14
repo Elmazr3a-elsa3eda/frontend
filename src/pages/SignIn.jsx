@@ -3,15 +3,16 @@ import AuthContext from "../context/userContext"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
-
+import Loading from "../components/Loading";
 function SignIn() {
+  const [loading, setLoading] = useState(false);
   const { token, setToken } = useContext(AuthContext)
   const [data, setData] = useState({username: '', password: ''})
   const [error, setError] = useState(null)
 
   const handleLogin = (token) => {
     setToken(token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   };
 
   const handleSignIn =  (data) => {
@@ -19,16 +20,15 @@ function SignIn() {
       setToken(res.data.token)
       handleLogin(res.data.token)
     }).catch((err) => {
+      setLoading(false)
       console.log(err)
-      
-      if(err.response.data == "User not found"){
-        setError("Incorrect email or password")
-      }
+      setError(err.response.data)
     })
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    setLoading(true)
+    e.preventDefault();	
     handleSignIn(data)
   }
 
@@ -81,7 +81,7 @@ function SignIn() {
         Sign in
       </button>
       {error && <p className="text-red-500 text-lg font-protest p-2 rounded-md border border-red-500 text-center mx-auto w-full">{error}</p>}
-
+      {/* {loading && <Loading />} */}
       <p className="text-center text-sm text-gray-500">
         No account?
         <Link to="/signup" className="underline">Sign up</Link>
