@@ -9,8 +9,8 @@ body{
 
 .loader{
 	position: absolute;
-	top: 20%;
-	left: 60%;
+	top: 25%;
+	left: 56%;
   z-index: 99999;
 }
 
@@ -27,30 +27,37 @@ body{
 	}
 }
 .bar{
-	background: #e74c3c;
+	background: #176B87;
 	top: 150px;
 	right: 200px;
 }
 
 .bar2{
-	background: #3498db;
+	background: #64CCC5;
 	top: 30px;
 	right: 150px;
 	animation-delay: 0.3s;
 }
 
 .bar3{
-	background: #2ecc71;
+	background: #9EFFA9;
 	bottom:90px;
 	right: 100px;
 	animation-delay: 0.6s;
 }
 
 .bar4{
-	background: #f1c40f;
+	background: #EEEEEE;
 	bottom: 210px;
 	right: 50px;
 	animation-delay: 0.9s;
+}
+
+@media (max-width: 768px){
+	.loader{
+		top: 20%;
+		left: 80%;
+	}
 }
 
 #userPic{
