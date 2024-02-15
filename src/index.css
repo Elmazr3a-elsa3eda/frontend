@@ -57,3 +57,32 @@ body{
 	font-size: 40px;
 	line-height: 0;
 }
+/* Width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #ffffff00; /* Color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #1d1d1d33; /* Color of the scrollbar */
+	border: #292929 1px solid;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #1b1b1b77; /* Color of the scrollbar on hover */
+}
+
+a.active{
+  color: #cccccc;
+  background-color: #1e1b20;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  text-decoration: none;
+}

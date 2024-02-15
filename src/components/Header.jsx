@@ -1,21 +1,12 @@
-import { useContext, useEffect, useState,useRef } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { MdClose } from "react-icons/md";
+import { useContext, useEffect, useState, useRef } from "react";
+import { FaRegCopy } from "react-icons/fa";
 import AuthContext from "../context/userContext";
+import { useSnackbar } from "../context/SnackBarContext";
 function Header() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [userData, setUserData] = useState({});
 	const { user } = useContext(AuthContext);
-  useEffect(() => {
-    try {
-      const userDataFromStorage = localStorage.getItem('user');
-      if (userDataFromStorage) {
-        setUserData(JSON.parse(userDataFromStorage));
-      }
-    } catch (error) {
-      console.error('Error parsing user data from local storage:', error);
-    }
-  }, []);
+
 	const menuRef = useRef();
 
   useEffect(() => {
@@ -24,14 +15,14 @@ function Header() {
         setMenuOpen(false);
       }
     };
-
-    document.addEventListener('mousedown', handleClickOutside);
+  
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 	return (
-		<header className="max-w-screen w-full px-4 py-8 sm:px-6 sm:py-12 lg:px-8 bg-darkerblue/80 relative z-10">
+		<header className="max-w-screen w-full px-4 py-8 sm:px-6 sm:py-12 lg:px-8 bg-darkerblue/80 relative z-30">
 			<div className="flex flex-row justify-between items-center">
 				<div className="text-center sm:text-left">
 					<h1 className="font-protest text-xl font-bold text-green capitalize w-20 md:w-fit sm:text-3xl">
@@ -39,13 +30,16 @@ function Header() {
 					</h1>
 				</div>
 				<div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-					<div class="flex items-center justify-center h-12 w-12 bg-green rounded-full">
-						<span class="text-black text-3xl font-bold capitalize">{userData?.username?.[0]}</span>
+					<div
+						ref={menuRef}
+						onClick={() => setMenuOpen(!menuOpen)}
+						className="cursor-pointer flex items-center justify-center h-12 w-12 bg-green rounded-full"
+					>
+						<span className="text-black text-3xl font-bold capitalize">
+							{user?.username?.[0]}
+						</span>
+					  {menuOpen && <Menu />}
 					</div>
-					<button ref={menuRef} onClick={()=>setMenuOpen(!menuOpen)} className="md:hidden">
-						{menuOpen ? <MdClose className="text-3xl text-red-500" /> :<GiHamburgerMenu className="text-3xl" />}
-						{menuOpen && <Menu />}
-    			</button>
 				</div>
 			</div>
 		</header>
@@ -54,50 +48,57 @@ function Header() {
 
 export default Header;
 
-function Menu(){
-	return(
-		<div className="absolute top-20 right-0">
-  <div className="inline-flex items-center overflow-hidden rounded-md border bg-darkerblue/90">
-  </div>
+function Menu() {
+  const copyRef = useRef();
+  const { openSnackbar  } = useSnackbar();
+  
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(copyRef.current.innerText)
+    .then(() => {
+      console.log('Text copied to clipboard');
+      openSnackbar('ID Copied to Clipboard')
+    })
+      .catch(err => {
+        console.error('Could not copy text: ', err);
+      });
+  };
 
-  <div
-    className="absolute end-0 z-10 mt-2 w-56 rounded-md border border-black bg-darkerblue shadow-lg"
-    role="menu"
-  >
-    <div className="p-2">
-      <a
-        href="#"
-        className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-        role="menuitem"
-      >
-        View on Storefront
-      </a>
+	const { user } = useContext(AuthContext);
+	return (
+			<div
+				className="absolute  top-24 right-6 end-0 z-10 mt-2 rounded-md border border-darkerblue bg-green shadow-lg"
+				role="menu"
+			>
+				<div className="w-full p-4">
+					<a
+						href="#"
+						className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+						role="menuitem"
+					>
+						View Warehouse Info
+					</a>
 
-      <a
-        href="#"
-        className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-        role="menuitem"
-      >
-        View Warehouse Info
-      </a>
+					<a
+						href="#"
+						className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+						role="menuitem"
+					>
+						Duplicate Product
+					</a>
 
-      <a
-        href="#"
-        className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-        role="menuitem"
-      >
-        Duplicate Product
-      </a>
-
-      <a
-        href="#"
-        className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-        role="menuitem"
-      >
-        Unpublish Product
-      </a>
-    </div>
-  </div>
-</div>
-	)
+					<a
+						href="#"
+						className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+						role="menuitem"
+					>
+						Unpublish Product
+					</a>
+          					<p className="w-full flex gap-2 items-center">ID: <span ref={copyRef} >{user?._id}</span>
+            <span  className="bg-darkerblue text-white p-1 rounded">
+              <FaRegCopy  onClick={copyToClipboard} />
+            </span>
+          </p>
+				</div>
+			</div>
+	);
 }

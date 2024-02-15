@@ -1,37 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/userContext";
 import farmApi from "../api/farmApi";
-import FarmData from "../components/FarmData";
+import FarmerData from "../components/FarmerData";
 
 function Home() {
 	const { user } = useContext(AuthContext);
-	console.log("🚀 ~ Home ~ user:", user)
 
 	const [finalData, setFinalData] = useState();
 
 	const getFarmData = ()=> {
 		farmApi.getFarm(user._id).then(res => {
-			console.log(res.data[0])
 			setFinalData(res.data[0])
 		}).catch(err => {
 			console.log(err)
 		})
 	}
 
-	useEffect(()=>{
-		getFarmData()
-	},[])
+	// useEffect(()=>{
+	// 	getFarmData()
+	// },[])
 
 
 	return (
-		<div className="text-white">
-			<FarmData finalData={finalData} />
-			
-			<div>
-			manga
-			</div>
-		
-		</div>
+<div className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
+		<FarmerData />
+</div>
 	);
 }
 

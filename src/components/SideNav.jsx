@@ -19,7 +19,7 @@ function SideNav() {
 	};
 	return (
 		<>
-			<div className="w-full max-w-[133px] h-full min-h-[500px] max-h-[782px] pt-10 pb-5 flex flex-col justify-center items-center bg-darkerblue/70 z-20 rounded-[20px] relative">
+			<div className="w-full max-w-[133px] h-full min-h-[500px] max-h-[500px] pt-10 pb-5 flex flex-col justify-center items-center bg-darkerblue z-20 rounded-[20px]">
 				<div className="w-full flex flex-col justify-center items-center gap-8 border-b pb-8">
 					<NavLink
 						to={"/"}
