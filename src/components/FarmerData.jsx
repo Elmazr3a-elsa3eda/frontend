@@ -1,6 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function FarmerData({finalData}) {
+function FarmerData({data}) {
+console.log("🚀 ~ FarmerData ~ data:", data)
+
+
+  
   return (
   //   <div>
   //   <p>
@@ -65,9 +70,14 @@ function FarmerData({finalData}) {
   //   </div>
   // </div>
   <>
+    {data?.map((farm)=> (
+      <Link to={`/${farm?._id}`} className="h-32 rounded-lg bg-gray-200 text-center" key={farm._id}>
+        <p>{farm.name}</p>
+      </Link>
+    ))}
+  {/* <div className="h-32 rounded-lg bg-gray-200 text-center"></div>
   <div className="h-32 rounded-lg bg-gray-200"></div>
-  <div className="h-32 rounded-lg bg-gray-200"></div>
-  <div className="h-32 rounded-lg bg-gray-200 lg:col-span-2"></div>
+  <div className="h-32 rounded-lg bg-gray-200 lg:col-span-2"></div> */}
   </>
   )
 }
