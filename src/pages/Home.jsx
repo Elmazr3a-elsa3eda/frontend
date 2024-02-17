@@ -4,57 +4,26 @@ import FarmerData from "../components/FarmerData";
 import farmApi from "../api/farmApi";
 import FarmCreation from "../components/FarmCreation";
 import Loading from "../components/Loading";
+import { useQuery } from "react-query";
 
 function Home() {
 	const { user } = useContext(AuthContext);
 	const [IsLoading, setIsLoading] = useState(false);
 	const [finalData, setFinalData] = useState();
-	const [userFarms, setUserFarms] = useState(0);
+	const [userFarms, setUserFarms] = useState([]);
 
-	const getFarmData = () => {
-		farmApi
-			.getFarmByUser(user._id)
-			.then((res) => {
-				if (res.data.length == 0) {
-					console.log("🚀 ~ .then ~ res.data:", res.data)
+	const { data, isLoading, isError, error } = useQuery(["data", window.location], async () => {
+		const res = await farmApi.getFarmByUser(user._id);
+		setUserFarms(res.data);
+		return res.data;
+	});
 
-					console.log("No farm found");
-				} else {
-					setUserFarms(res.data);
-				}
-			})
-			.catch((err) => console.log(err));
-	};
-
-	useEffect(()=>{
-    setTimeout(()=>{
-			// if(userFarms !== 0){
-      setIsLoading(true);
-			// }
-    },1000)
-  },[userFarms])
-
-	useEffect(() => {
-		if (user.role !== "stakeholder") return;
-		console.log(user._id);
-		getFarmData();
-	}, []);
+	if (isLoading) return <Loading />;
+	if (isError) return <div>Error loading data: {error.message}</div>;
 
 	return (
-		!IsLoading ?
-			<Loading />
-		:
 		<div className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
-			{
-				userFarms === 0 ?
-				(<>
-					<FarmCreation />
-				</>)
-				: 
-				<>
-					<FarmerData data={userFarms} />
-				</>
-			}
+			<FarmerData data={data} />
 		</div>
 	);
 }

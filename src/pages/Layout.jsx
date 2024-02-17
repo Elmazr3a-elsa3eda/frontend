@@ -10,9 +10,12 @@ import Footer from "../components/Footer";
 import axios from "axios";
 import FarmDetails from "./FarmDetails";
 import Charts from "./Charts";
+import { QueryClient, QueryClientProvider } from 'react-query'
+const queryClient = new QueryClient();
 function Layout() {
   const { token } = useContext(AuthContext);
-
+<QueryClientProvider client={queryClient}>
+</QueryClientProvider>
 	return (
 		<div className="w-screen min-h-screen bg-black overflow-x-hidden  relative">
 			<Header />
@@ -23,14 +26,16 @@ function Layout() {
 				</div>
 
 				<div className="w-full md:w-10/12 lg:w-11/12 h-full z-10">
-					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/:farmName" element={<FarmDetails />} />
-						<Route path="/settings" element={<Settings />} />
-						<Route path="/charts" element={<Charts />} />
-						<Route path="/crops" element={<Charts />} />
-						<Route path="/notifications" element={<Charts />} />
-					</Routes>
+					<QueryClientProvider client={queryClient}>
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route path="/:farmName" element={<FarmDetails />} />
+							<Route path="/settings" element={<Settings />} />
+							<Route path="/charts" element={<Charts />} />
+							<Route path="/crops" element={<Charts />} />
+							<Route path="/notifications" element={<Charts />} />
+						</Routes>
+					</QueryClientProvider>
 				</div>
 			</div>
 

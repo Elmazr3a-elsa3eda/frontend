@@ -3,10 +3,10 @@ import React from "react";
 function Loading() {
 	return (
 		<div class="loader">
-			<div class="bar"></div>
-			<div class="bar2"></div>
-			<div class="bar3"></div>
-			<div class="bar4"></div>
+			<div className="bar"></div>
+			<div className="bar2"></div>
+			<div className="bar3"></div>
+			<div className="bar4"></div>
 		</div>
 	);
 }
