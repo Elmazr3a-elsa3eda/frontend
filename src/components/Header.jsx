@@ -25,12 +25,10 @@ function Header() {
 	return (
 		<header className="max-w-screen w-full px-4 py-8 sm:px-6 sm:py-12 lg:px-8 bg-darkerblue/80 relative z-30">
 			<div className="flex flex-row justify-between items-center">
-				<div className="text-center sm:text-left">
-					<Link to={'/'} className="font-protest text-xl font-bold text-green hover:text-black capitalize w-20 md:w-fit sm:text-3xl duration-300">
-						elmazr3a elsa3eda
-					</Link>
-				</div>
-				<div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
+				<Link to={'/'} className="font-protest text-xl font-bold text-green hover:text-black capitalize w-20 md:w-fit sm:text-3xl duration-300">
+					elmazr3a elsa3eda
+				</Link>
+				<div className="flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
 					<div
 						ref={menuRef}
 						onClick={() => setMenuOpen(!menuOpen)}

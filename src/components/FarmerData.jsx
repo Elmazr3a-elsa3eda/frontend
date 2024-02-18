@@ -1,87 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import AuthContext from '../context/userContext';
+import { GiBarn } from "react-icons/gi";
+import { IoMdResize } from "react-icons/io";
+import { MdAccessTime } from "react-icons/md";
+import { IoMdDoneAll } from "react-icons/io";
+import { GrUserWorker } from "react-icons/gr";
 
 function FarmerData({data}) {
-console.log("🚀 ~ FarmerData ~ data:", data)
+  const { user } = useContext(AuthContext);
 
 
   
   return (
-  //   <div>
-  //   <p>
-  //     farmID: {finalData?._id}
-  //   </p>
-  //   <p>
-  //     farmName: {finalData?.name}
-  //   </p>
-  //   <p>
-  //     farm size: {finalData?.size} acres
-  //   </p>
-  //   <p>
-  //     planted percentage: {finalData?.planted_percentage}%
-  //   </p>
-  //   <p>
-  //     harvested percentage: {finalData?.harvest_percentage}%
-  //   </p>
-  //   <div className="bg-green text-black w-fit p-2 rounded my-2">
-  //     <h1 className="text-black font-bold text-3xl">crops</h1>
-  //     {finalData?.crops?.map((crop) => (
-  //       <div key={crop._id}  className="bg-darkerblue text-white w-fit p-2 rounded my-2">
-  //         <p>crop name: {crop.Crop_Type}</p>
-  //         <p>crop harvest date: {crop.Crop_HarvestDate}</p>
-  //         <p>crop plant date: {crop.Crop_PlantDate}</p>
-  //       </div>
-  //     ))}
-  //   </div>
-  //   <div className="bg-green text-black w-fit p-2 rounded my-2">
-  //   <h1 className="text-black font-bold text-3xl">equipments</h1>
-  //   {
-  //     finalData?.equipments?.map((eq)=>(
-  //       <div key={eq._id} className="bg-indigo-500 w-fit p-2 rounded my-2">
-  //         <p>equipment count: {eq.count}</p>
-  //         <p>equipment name: {eq.name}</p>
-  //       </div>
-  //     ))
-  //   }
-  //   </div>
-  //   <div className="bg-green text-black w-fit p-2 rounded my-2">
-  //     <h1 className="text-black font-bold text-3xl">fertilizers</h1>
-  //   {
-  //     finalData?.fertilizers?.map((fer)=>(
-  //       <div key={fer._id} className="bg-blue-400 w-fit p-2 rounded my-2">
-  //         <p>fertilizer count: {fer.count}</p>
-  //         <p>fertilizers name: {fer.name}</p>
-  //       </div>
-  //     ))
-  //   }
-  //   </div>
-    
-  //   <div className="bg-red-500 text-black w-fit p-2 rounded my-2">
-  //     <h1 className="text-black font-bold text-3xl">Workers</h1>
-  //   {
-  //     finalData?.workers?.map((worker)=>(
-  //       <div key={worker._id} className="bg-green w-fit p-2 rounded my-2">
-  //         <p>name: {worker.username}</p>
-  //         <p>role {worker.role}</p>
-  //         <p>email {worker.email}</p>
-  //       </div>
-  //     ))
-  //   }
-  //   </div>
-  // </div>
   <>
     {data?.map((farm)=> (
-      <Link to={`/${farm?._id}`} className="rounded-lg py-4 bg-gray-200/65 flex flex-col justify-start items-center" key={farm._id}>
-        <p className='w-40'>Farm: {farm.name}</p>
-        <p className='w-40'>Size: {farm.size}</p>
-        <p className='w-40'>Planted: {farm.planted_percentage}%</p>
-        <p className='w-40'>Harvested: {farm.harvest_percentage}%</p>
-        <p className='w-40'>workers No. {farm.workers.length}</p>
+      <Link to={`/${farm?._id}`} className="w-full rounded-lg py-4 bg-gray-200/65 flex flex-col justify-start items-center gap-2 hover:scale-[101%] duration-150" key={farm._id}>
+        <p className='w-fit flex items-end gap-2 text-xl'><GiBarn className='text-red-700 text-3xl' />Farm: {farm.name}</p>
+        <p className='w-fit flex items-end gap-2 text-xl'><IoMdResize className='text-black text-3xl' />Size: {farm.size} acre</p>
+        <p className='w-fit flex items-end gap-2 text-xl'><MdAccessTime className='text-blue-500 text-3xl' />Planted: {farm.planted_percentage}%</p>
+        <p className='w-fit flex items-end gap-2 text-xl'><IoMdDoneAll className='text-green text-3xl' />Harvested: {farm.harvest_percentage}%</p>
+        <p className={`w-fit flex items-end gap-2 text-xl ${user?.role === 'farmer'? "hidden" : ''}`}><GrUserWorker className='text-orange-500 text-3xl' />workers No. {farm.workers.length}</p>
       </Link>
     ))}
-  {/* <div className="h-32 rounded-lg bg-gray-200 text-center"></div>
-  <div className="h-32 rounded-lg bg-gray-200"></div>
-  <div className="h-32 rounded-lg bg-gray-200 lg:col-span-2"></div> */}
   </>
   )
 }
