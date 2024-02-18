@@ -11,6 +11,7 @@ import axios from "axios";
 import FarmDetails from "./FarmDetails";
 import Charts from "./Charts";
 import { QueryClient, QueryClientProvider } from 'react-query'
+import Crops from "./Crops";
 const queryClient = new QueryClient();
 function Layout() {
   const { token } = useContext(AuthContext);
@@ -20,19 +21,19 @@ function Layout() {
 		<div className="w-screen min-h-screen bg-black overflow-x-hidden  relative">
 			<Header />
 
-			<div className="w-full min-h-screen py-4 px-2 flex flex-row justify-between items-start gap-5">
-				<div className="md:w-2/12 lg:w-1/12 h-full md:block hidden">
+			<div className="w-full min-h-screen py-4 px-1 md:px-0 flex flex-row justify-start items-start gap-2 bg-red-500">
+				<div className="md:w-fit lg:w-fit h-full md:block hidden bg-blue-600">
 					<SideNav />
 				</div>
 
-				<div className="w-full md:w-10/12 lg:w-11/12 h-full z-10">
+				<div className="w-full md:w-full lg:w-full h-full z-10 bg-gray-400">
 					<QueryClientProvider client={queryClient}>
 						<Routes>
 							<Route path="/" element={<Home />} />
-							<Route path="/:farmName" element={<FarmDetails />} />
+							<Route path="/:farmId" element={<FarmDetails />} />
 							<Route path="/settings" element={<Settings />} />
 							<Route path="/charts" element={<Charts />} />
-							<Route path="/crops" element={<Charts />} />
+							<Route path="/crops" element={<Crops />} />
 							<Route path="/notifications" element={<Charts />} />
 						</Routes>
 					</QueryClientProvider>

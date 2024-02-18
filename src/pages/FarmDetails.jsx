@@ -4,17 +4,20 @@ import Loading from "../components/Loading";
 import AddWorker from "../components/AddWorker";
 import { MdDeleteForever } from "react-icons/md";
 import { useQuery } from "react-query";
+import AddCrops from "../components/AddCrops";
+import { useSnackbar } from '../context/SnackBarContext';
 
 function FarmDetails() {
 	const [IsLoading, setIsLoading] = useState(false);
 	const [farmData, setFarmData] = useState({});
 	const [WorkersModal, setWorkersModal] = useState(false);
+	const [cropsModal, setCropsModal] = useState(false);
+	const { openSnackbar  } = useSnackbar();
 
 	const farmId = window.location.pathname.split("/")[1];
 
-	const {data, isLoading, isError, error} = useQuery(["data", window.location], async () => {
+	const {data, isLoading, isError, error,refetch} = useQuery(["data", window.location], async () => {
 		const res = await farmApi.getFarmById(farmId);
-		// setFarmData(res.data);
 		return res.data;
 	})
   
@@ -23,7 +26,8 @@ function FarmDetails() {
     farmApi.removeWorker(farmID ,workerID)
     .then(res => {
       console.log(res)
-      // getFarm(farmId)
+			openSnackbar('Worker Removed');
+      refetch()
     })
     .catch(err => console.log(err))
   }
@@ -33,8 +37,8 @@ function FarmDetails() {
 
 	return (
 		<>
-			<div className="text-white flex flex-col justify-center items-center gap-2">
-				<p>{data?.name}</p>
+			<div className="text-white w-full h-full">
+				<p>Farm name: {data?.name}</p>
 				<p>{data?._id}</p>
 				<div className="bg-darckblue w-fit p-4 flex flex-col justify-center items-start gap-4">
 					<h1 className="text-white">Stakholders</h1>
@@ -55,7 +59,7 @@ function FarmDetails() {
 								Add Workers
 							</button>
 						) : (
-              <div>
+              <div className="">
 							{data?.workers?.map((worker) => (
 								<div key={worker._id} className="bg-gray-900 p-2 rounded">
 									<p>username: {worker.username}</p>
@@ -73,8 +77,13 @@ function FarmDetails() {
 
 					</div>
 				</div>
+				<div>
+					<p>add crops</p>
+					<button onClick={()=> setCropsModal(true)}>Add</button>
+				</div>
 			</div>
-          {WorkersModal && <AddWorker farmID={farmId} close={()=> setWorkersModal(false)} />}
+          {WorkersModal && <AddWorker farmID={farmId} refetch={refetch} close={()=> setWorkersModal(false)} />}
+          {cropsModal && <AddCrops farmId={farmId} refetch={refetch} close={()=> setCropsModal(false)} />}
 		</>
 	);
 }

@@ -3,7 +3,7 @@ import farmApi from '../api/farmApi'
 import { useSnackbar } from '../context/SnackBarContext';
 
 
-function AddWorker({close,farmID}) {
+function AddWorker({close,farmID,refetch}) {
   const [workerID, setWorkerID] = useState('')
   const { openSnackbar  } = useSnackbar();
 
@@ -14,6 +14,7 @@ function AddWorker({close,farmID}) {
     .then(res => {
       console.log(res.data.message)
       openSnackbar('Worker Added');
+      refetch()
       close()
     })
     .catch(err => console.log(err))

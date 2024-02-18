@@ -23,7 +23,12 @@ function Home() {
 
 	return (
 		<div className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
-			<FarmerData data={data} />
+			{
+				data?.length > 0 ? 
+				<FarmerData data={data} />
+				:
+				<FarmCreation />
+			}
 		</div>
 	);
 }

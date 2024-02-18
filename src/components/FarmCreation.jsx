@@ -20,8 +20,18 @@ function FarmCreation() {
     userId: user._id,
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    let newValue = value;
+  
+    if (name === 'crops') {
+      newValue = value.split(' ');
+    }
+  
+    setFormData({
+      ...formData,
+      [name]: [newValue]
+    });
   };
 
   useEffect(()=>{
