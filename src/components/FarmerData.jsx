@@ -71,8 +71,12 @@ console.log("🚀 ~ FarmerData ~ data:", data)
   // </div>
   <>
     {data?.map((farm)=> (
-      <Link to={`/${farm?._id}`} className="h-32 rounded-lg bg-gray-200 text-center" key={farm._id}>
-        <p>{farm.name}</p>
+      <Link to={`/${farm?._id}`} className="rounded-lg py-4 bg-gray-200/65 flex flex-col justify-start items-center" key={farm._id}>
+        <p className='w-40'>Farm: {farm.name}</p>
+        <p className='w-40'>Size: {farm.size}</p>
+        <p className='w-40'>Planted: {farm.planted_percentage}%</p>
+        <p className='w-40'>Harvested: {farm.harvest_percentage}%</p>
+        <p className='w-40'>workers No. {farm.workers.length}</p>
       </Link>
     ))}
   {/* <div className="h-32 rounded-lg bg-gray-200 text-center"></div>

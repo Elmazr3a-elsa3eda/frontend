@@ -21,12 +21,12 @@ function Layout() {
 		<div className="w-screen min-h-screen bg-black overflow-x-hidden  relative">
 			<Header />
 
-			<div className="w-full min-h-screen py-4 px-1 md:px-0 flex flex-row justify-start items-start gap-2 bg-red-500">
-				<div className="md:w-fit lg:w-fit h-full md:block hidden bg-blue-600">
+			<div className="w-full min-h-screen py-4 px-1 md:px-0 flex flex-row justify-start items-start gap-2">
+				<div className="md:w-fit lg:w-fit h-full md:block hidden">
 					<SideNav />
 				</div>
 
-				<div className="w-full md:w-full lg:w-full h-full z-10 bg-gray-400">
+				<div className="w-full md:w-full lg:w-full h-full z-10">
 					<QueryClientProvider client={queryClient}>
 						<Routes>
 							<Route path="/" element={<Home />} />
