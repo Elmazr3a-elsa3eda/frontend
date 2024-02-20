@@ -54,7 +54,7 @@ function FarmDetails() {
 				</div>
 				<div className="bg-darkerblue w-full lg:w-2/4 p-4 flex flex-col justify-center items-center gap-4 rounded-md">
 					<h1 className="text-white font-semibold text-xl">workers</h1>
-					<div className="flex flex-col justify-center items-start gap-4 w-full">
+					<div className="flex flex-col justify-center items-center gap-4 w-full">
 						{data?.workers?.length === 0 ? (
 							<button onClick={()=> setWorkersModal(true)} className={`bg-green text-darkerblue py-1 px-2 rounded ${user.role != 'stakeholder' ? 'hidden': ''}`}>
 								Add Workers

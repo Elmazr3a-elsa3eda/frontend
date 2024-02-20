@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { useContext, useEffect, useRef } from "react";
-import sound from "../../public/sound.mp3";
+import sound from "/sound.mp3";
 import AuthContext from "../context/userContext";
 import Header from "../components/Header";
 import Bubbles from "../components/Bubbles";
@@ -23,16 +23,10 @@ function Layout() {
 	const playAudio = () => {
 		audioRef.current
 			.play()
-			.then(() => {
-				// Handle successful playback (optional)
-			})
-			.catch((error) => {
-				// Handle potential errors (optional)
-			});
 	};
 
 	useEffect(() => {
-		playAudio(); // Automatically play audio when component mounts
+		playAudio();
 	}, []);
 	return (
 		<div className="w-screen min-h-screen bg-black overflow-x-hidden  relative">
