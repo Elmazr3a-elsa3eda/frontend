@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/userContext";
 import farmApi from "../api/farmApi";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 function FarmCreation() {
 	const { user } = useContext(AuthContext);
 	if (user.role !== "stakeholder") return <div>you are not a stakeholder</div>;
+	const navigate = useNavigate()
 
 	const [formData, setFormData] = useState({
 		name: '',
@@ -50,7 +52,7 @@ function FarmCreation() {
 			.createFarm(formData)
 			.then((res) => {
 				console.log(res);
-				window.location.reload();
+				navigate("/");
 			})
 			.catch((err) => console.log(err));
 		console.log(formData)
