@@ -12,11 +12,11 @@ function Charts() {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center gap-4">
 			<div className="w-full flex flex-col lg:flex-row justify-center items-center gap-4">
-				<TotalChart data={data1} overallResult={overallResult1} percentage={percentage1} text={"active users"} />
+				<TotalChart data={data1} overallResult={overallResult1} percentage={percentage1} text={"Fertilizer Usage"} />
 
-				<TotalChart data={data2} overallResult={overallResult2} percentage={percentage2} text={"total orders"} />
+				<TotalChart data={data2} overallResult={overallResult2} percentage={percentage2} text={"Field Irrigation Efficiency"} />
 
-				<TotalChart data={data3} overallResult={overallResult3} percentage={percentage3} text={"total profits"} />
+				<TotalChart data={data3} overallResult={overallResult3} percentage={percentage3} text={"Equipment Utilization"} />
 			</div>
 
 			<div className="w-full flex flex-col  justify-center items-start gap-4">
