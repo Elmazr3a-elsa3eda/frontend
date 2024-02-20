@@ -50,7 +50,6 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     setIsSubmitted(true);
     const formErrors = validate(form);
     setErrors(formErrors);

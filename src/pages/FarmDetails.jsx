@@ -16,7 +16,7 @@ function FarmDetails() {
 	const [cropsModal, setCropsModal] = useState(false);
 	const { openSnackbar  } = useSnackbar();
 
-	const farmId = window.location.pathname.split("/")[1];
+	const farmId = window.location.href.split("/")[4];
 
 	const {data, isLoading, isError, error,refetch} = useQuery(["data", window.location], async () => {
 		const res = await farmApi.getFarmById(farmId);
@@ -24,10 +24,8 @@ function FarmDetails() {
 	})
   
   const removeWorker_ = (farmID ,workerID) => {
-    console.log("🚀 ~ FarmDetails ~ farmID ,workerID:", farmID ,workerID)
     farmApi.removeWorker(farmID ,workerID)
     .then(res => {
-      console.log(res)
 			openSnackbar('Worker Removed');
       refetch()
     })

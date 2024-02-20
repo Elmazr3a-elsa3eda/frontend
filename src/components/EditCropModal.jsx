@@ -39,7 +39,6 @@ function EditCropModal({close,farmId,refetch, cropData}) {
     // })
     cropsApi.patchCrop(cropData._id, crop)
     .then((res) => {
-      console.log(res);
       refetch()
       openSnackbar('Crop Edited');
       close();
@@ -47,7 +46,6 @@ function EditCropModal({close,farmId,refetch, cropData}) {
     .catch((err) => {
       console.log(err);
     })
-    console.log(crop);
   };
 
   return (

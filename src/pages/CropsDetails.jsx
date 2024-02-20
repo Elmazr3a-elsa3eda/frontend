@@ -15,7 +15,7 @@ function CropsDetails() {
   const [cropData, setCropData] = useState(null);
 	const { openSnackbar  } = useSnackbar();
 
-  const farmId = window.location.pathname.split("/")[2];
+  const farmId = window.location.href.split("/")[5];
   const {data,isLoading, isError ,error,refetch} = useQuery(['data',farmId], async()=>{
     const res = await farmApi.getFarmCrops(farmId)
     return res.data
@@ -29,7 +29,6 @@ function CropsDetails() {
   const deleteCrop_ = (id, farmId) => {
     cropsApi.deletCrop(id, farmId)
     .then(res => {
-      console.log(res)
       openSnackbar('Crop Removed');
       refetch()
     })

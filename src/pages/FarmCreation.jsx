@@ -55,7 +55,6 @@ function FarmCreation() {
 				navigate("/");
 			})
 			.catch((err) => console.log(err));
-		console.log(formData)
 	};
 
   const text = "asjkdhkasd kajshdjkasdh"

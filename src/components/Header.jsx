@@ -94,7 +94,6 @@ function Menu() {
 		navigator.clipboard
 			.writeText(copyRef.current.innerText)
 			.then(() => {
-				console.log("Text copied to clipboard");
 				openSnackbar("ID Copied to Clipboard");
 			})
 			.catch((err) => {

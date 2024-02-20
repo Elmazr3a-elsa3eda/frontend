@@ -8,11 +8,9 @@ function AddWorker({close,farmID,refetch}) {
   const { openSnackbar  } = useSnackbar();
 
   const addWorker = (farmID ,workerID) => {
-    console.log("🚀 ~ addWorker ~ farmID ,workerID:", farmID ,workerID)
 
     farmApi.addWorker(farmID ,workerID)
     .then(res => {
-      console.log(res.data.message)
       openSnackbar('Worker Added');
       refetch()
       close()

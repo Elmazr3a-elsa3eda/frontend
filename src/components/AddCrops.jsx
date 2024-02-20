@@ -28,7 +28,6 @@ function AddCrops({close,farmId,refetch}) {
     event.preventDefault();
     cropsApi.createCrop({...crop,farmId})
     .then((res) => {
-      console.log(res);
       refetch()
       openSnackbar('Crop Added');
       close();
