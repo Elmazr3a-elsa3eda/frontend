@@ -97,10 +97,9 @@ a.active{
 .modal {
 	inset: 0;
 	position: fixed;
+	border-radius: 0.75rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-	width: 500px; /* Full width */
-	overflow: auto; /* Enable scroll if needed */
 	z-index: 9999;
 }

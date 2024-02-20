@@ -13,6 +13,7 @@ import Charts from "./Charts";
 import { QueryClient, QueryClientProvider } from 'react-query'
 import Crops from "./Crops";
 import FarmCreation from "./FarmCreation";
+import CropsDetails from "./CropsDetails";
 const queryClient = new QueryClient();
 function Layout() {
   const { token } = useContext(AuthContext);
@@ -35,6 +36,7 @@ function Layout() {
 							<Route path="/settings" element={<Settings />} />
 							<Route path="/charts" element={<Charts />} />
 							<Route path="/crops" element={<Crops />} />
+							<Route path="/crops/:id" element={<CropsDetails />} />
 							<Route path="/notifications" element={<Charts />} />
 							<Route path="/createfarm" element={<FarmCreation />} />
 						</Routes>

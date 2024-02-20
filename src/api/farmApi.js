@@ -11,10 +11,13 @@ const addWorker = (farmId, workerID) => axiosClient.post(`farm/${farmId}/addWork
 
 const removeWorker = (farmId, workerId) => axiosClient.delete(`farm/${farmId}/removeWorker/${workerId}`);
 
+const getFarmCrops = (farmId) => axiosClient.get(`farm/${farmId}/crops`);
+
 export default {
   createFarm,
   getFarmByUser,
   getFarmById,
   addWorker,
-  removeWorker
+  removeWorker,
+  getFarmCrops
 };

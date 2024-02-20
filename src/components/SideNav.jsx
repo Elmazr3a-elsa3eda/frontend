@@ -74,7 +74,7 @@ function SideNav() {
 				</div>
 
 				<div className="w-full flex flex-1 flex-col justify-end items-center gap-2">
-					<NavLink
+					{/* <NavLink
 						to={"/settings"}
 						className="
 							rounded-xl p-1.5 md:p-3 text-base md:text-2xl
@@ -83,7 +83,7 @@ function SideNav() {
 						"
 					>
 						<BsGear />
-					</NavLink>
+					</NavLink> */}
 					<button
 						onClick={handleLogout}
 						className="
