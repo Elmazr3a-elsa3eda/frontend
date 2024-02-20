@@ -14,6 +14,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import Crops from "./Crops";
 import FarmCreation from "./FarmCreation";
 import CropsDetails from "./CropsDetails";
+import AutoplaySound from "../components/AutoplaySound";
 const queryClient = new QueryClient();
 function Layout() {
   const { token } = useContext(AuthContext);
@@ -22,7 +23,7 @@ function Layout() {
 	return (
 		<div className="w-screen min-h-screen bg-black overflow-x-hidden  relative">
 			<Header />
-
+			<AutoplaySound/>
 			<div className="w-full min-h-screen py-4 px-1 md:pr-2 flex flex-row justify-start items-start gap-2">
 				<div className="md:w-fit lg:w-fit h-full md:block hidden">
 					<SideNav />
