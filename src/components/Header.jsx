@@ -3,12 +3,26 @@ import { FaRegCopy } from "react-icons/fa";
 import AuthContext from "../context/userContext";
 import { useSnackbar } from "../context/SnackBarContext";
 import { Link } from "react-router-dom";
+import sound from "/sound.mp3";
+import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
 function Header() {
 	const [menuOpen, setMenuOpen] = useState(false);
-	const [userData, setUserData] = useState({});
+	const [soundOn, setSoundOn] = useState(false);
 	const { user } = useContext(AuthContext);
 
 	const menuRef = useRef();
+	const audioRef = useRef();
+	const btn = useRef();
+
+  const playAudio = () => {
+    if (audioRef.current.paused) {
+      audioRef.current.play();
+			setSoundOn(true);
+    } else {
+      audioRef.current.pause();
+			setSoundOn(false);
+    }
+  };
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
@@ -25,9 +39,27 @@ function Header() {
 	return (
 		<header className="max-w-screen w-full px-4 py-8 sm:px-6 sm:py-12 lg:px-8 bg-darkerblue/80 relative z-30">
 			<div className="flex flex-row justify-between items-center">
-				<Link to={'/'} className="font-protest text-xl font-bold text-green hover:text-black capitalize w-20 md:w-fit sm:text-3xl duration-300">
-					elmazr3a elsa3eda
-				</Link>
+				<div className="flex justify-center items-end gap-2">
+					<Link
+						to={"/"}
+						className="font-protest text-xl font-bold text-green hover:text-black capitalize w-20 md:w-fit sm:text-3xl duration-300"
+					>
+						elmazr3a elsa3eda
+					</Link>
+					<div>
+						<button ref={btn} onClick={playAudio} className="text-2xl mt-1 hover:text-green duration-300">
+							{
+								soundOn ?
+								<IoVolumeHighSharp />
+								:
+								<IoVolumeMute />
+							}
+							</button>
+						<audio ref={audioRef}>
+							<source id="audio" src={sound} type="audio/mp3" />
+						</audio>
+					</div>
+				</div>
 				<div className="flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
 					<div
 						ref={menuRef}
@@ -78,11 +110,25 @@ function Menu() {
 		>
 			<div className="w-full p-4 flex flex-col gap-2">
 				<div className="md:hidden w-full flex flex-col justify-center items-start gap-2 text-xl">
-					<Link className="pb-1 border-b border-slate-800 w-full" to={'/'}>Home</Link>
-					<Link className="pb-1 border-b border-slate-800 w-full" to={'/charts'}>Charts</Link>
-					<Link className="pb-1 border-b border-slate-800 w-full" to={'/crops'}>Crops</Link>
-					<Link className="pb-1 border-b border-slate-800 w-full" to={'/notifications'}>Notifications</Link>
-					<Link to={'/settings'}>Settings</Link>
+					<Link className="pb-1 border-b border-slate-800 w-full" to={"/"}>
+						Home
+					</Link>
+					<Link
+						className="pb-1 border-b border-slate-800 w-full"
+						to={"/charts"}
+					>
+						Charts
+					</Link>
+					<Link className="pb-1 border-b border-slate-800 w-full" to={"/crops"}>
+						Crops
+					</Link>
+					<Link
+						className="pb-1 border-b border-slate-800 w-full"
+						to={"/notifications"}
+					>
+						Notifications
+					</Link>
+					<Link to={"/settings"}>Settings</Link>
 				</div>
 				<p className="w-full flex gap-2 items-center">
 					ID: <span ref={copyRef}>{user?._id}</span>

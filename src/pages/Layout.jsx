@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useContext, useEffect, useRef } from "react";
-import sound from "/sound.mp3";
+import { useContext } from "react";
 import AuthContext from "../context/userContext";
 import Header from "../components/Header";
 import Bubbles from "../components/Bubbles";
@@ -17,25 +16,9 @@ import CropsDetails from "./CropsDetails";
 const queryClient = new QueryClient();
 function Layout() {
 	const { token } = useContext(AuthContext);
-	const audioRef = useRef();
-	const btn = useRef();
 
-	const playAudio = () => {
-		audioRef.current
-			.play()
-	};
-
-	useEffect(() => {
-		playAudio();
-	}, []);
 	return (
 		<div className="w-screen min-h-screen bg-black overflow-x-hidden  relative">
-			<div>
-				{/* <button ref={btn} onClick={playAudio}>Play Audio</button> */}
-				<audio ref={audioRef}>
-					<source id="audio" src={sound} type="audio/mp3" />
-				</audio>
-			</div>
 			<Header />
 			<div className="w-full min-h-screen py-4 px-1 md:pr-2 flex flex-row justify-start items-start gap-2">
 				<div className="md:w-fit lg:w-fit h-full md:block hidden">
